@@ -81,5 +81,10 @@
 
 </body>
 </html>
+=======
+$viewCustomers = new CustomersView;
+$viewCustomers -> showCustomers();
 
 
+?>
+>>>>>>> Stashed changes
