@@ -5,15 +5,15 @@ use mysqli;
 
 class Database {
     private const HOST = 'localhost';
-    private const DBNAME = 'mvc';
     private const USER = 'root';
     private const PASS = '';
+    private const DBNAME = 'mvc';
     private $conn = null;
 
     public function connect() 
     {
         try{
-            $con = new mysqli(self::HOST, self::DBNAME, self::USER, self::PASS);
+            $this -> conn = new mysqli(self::HOST, self::USER, self::PASS, self::DBNAME);
         } catch(\mysqli_sql_exception $e) {
              echo $e -> getMessage();
         }
