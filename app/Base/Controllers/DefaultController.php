@@ -8,13 +8,13 @@ class DefaultController extends BaseController {
 
     public function login(){
         if(isset($_POST['submit'])){
-            $this->logUserIn();
+            $this->signIn();
         }else{
         parent::renderView('Base', 'default', 'login');
         }
     }
 
-    private function logUserIn(){
+    private function signIn(){
         $username = $_POST['username'];
         $password = $_POST['password'];
         $dbObj = new \Base\Config\Database();
@@ -31,12 +31,32 @@ class DefaultController extends BaseController {
 
             $this->users();
         }else{
-            parent::renderView('Base', 'default', 'login', ['wrong username or password']);
+            parent::renderView('Base', 'default', 'login', ['Wrong username or password']);
         }
     }
 
     public function register(){
+        if(isset($_POST['submit'])){
+            $this->signUp();
+        }else{
         parent::renderView('Base', 'default', 'register');
+        }
+    }
+
+    private function signUp(){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $fname = $_POST['firstname'];
+        $lname = $_POST['lastname'];
+        if(empty($username) or empty($password)){
+            parent::renderView('Base', 'default', 'register',['Fill the required fields!']);
+        }else{
+        $dbObj = new \Base\Config\Database();
+        $user = new \Base\Models\User($dbObj);
+        $data = [$username, $password, $fname, $lname];
+        $user -> create($data);
+        parent::renderView('Base', 'default', 'login', ['You are registered! Now log in.']);
+        }
     }
 
     public function users(){

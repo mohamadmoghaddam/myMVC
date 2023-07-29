@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V16</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -49,6 +49,12 @@
 					</div>
 
 					<div class="container-login100-form-btn m-t-32">
+					<button class="login100-form">
+					Dont have and account? 	
+					<a href="http://mvc.local/register">
+						Register here.
+						</a>
+						</button>
 						<button class="login100-form-btn" type="submit" name="submit">
 							Login
 						</button>
