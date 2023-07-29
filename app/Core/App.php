@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-use Base\Controllers\DefaultController;
+use \Base\Controllers\DefaultController;
 
 class App {
     private $controller;
