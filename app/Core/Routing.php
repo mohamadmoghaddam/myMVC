@@ -32,7 +32,7 @@ class Routing {
             'route' => 'users/edit',
             'module' => 'Base',
             'controller' => 'DefaultController',
-            'action' => 'edit_user'
+            'action' => 'edituser'
         ],
     ];
 
