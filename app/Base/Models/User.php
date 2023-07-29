@@ -17,11 +17,11 @@ class User implements UserInterface {
         $query = "SELECT * FROM  " . self::USERTABLE;
         try{
         $result = $this->mysqli -> query($query);
-        $row = $result -> fetch_assoc();
+        $rows = $result -> fetch_all(MYSQLI_ASSOC);
         }catch(\mysqli_sql_exception $e) {
             echo $e -> getMessage();
         }
-        return $row;
+        return $rows;
     }
 
     public function fetchById(int $id){
