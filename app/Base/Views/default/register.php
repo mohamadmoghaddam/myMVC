@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V16</title>
+	<title>Register</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,21 +35,39 @@
 				<span class="login100-form-title p-b-41">
 					Register
 				</span>
-				<form class="login100-form validate-form p-b-33 p-t-5">
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+				<form class="login100-form validate-form p-b-33 p-t-5" method="post" action="">
+					<?php var_dump($data)?>
+					<div class="wrap-input100 validate-input">
 						<input class="input100" type="text" name="username" placeholder="User name">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
 
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="firstname" placeholder="First name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" name="lastname" placeholder="Last name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
 					<div class="container-login100-form-btn m-t-32">
-						<button class="login100-form-btn">
+					<button class="login100-form">
+					Have an account? 	
+					<a href="http://mvc.local/login">
+						Log in.
+						</a>
+						</button>
+						<button class="login100-form-btn" type="submit" name="submit">
 							Register
 						</button>
 					</div>
