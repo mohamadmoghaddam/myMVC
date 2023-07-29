@@ -25,10 +25,10 @@ class App {
             $this->action = 'homepage';
             $controllerPlusAction = (isset($url[0]) ? $url[0] : '') . (isset($url[1]) ? '/' . $url[1] : '');
             foreach($routing->routes as $route){
-                if($route['route'] == $controllerPlusAction){
-                    if(file_exists('../app/' . $route['module'] . '/Contollers/' . $route['controller'] . '.php')){
-                        $dynamicContollerName = '\\' . $route['module'] . '\Contollers\\' . $route['controller'];
-                        $this->controller = new $dynamicContollerName;
+                if(($route['route']) === ($controllerPlusAction)){
+                    if(file_exists('../app/' . $route['module'] . '/Controllers/' . $route['controller'] . '.php')){
+                        $dynamicControllerName = '\\' . $route['module'] . '\Controllers\\' . $route['controller'];
+                        $this->controller = new $dynamicControllerName;
                         $this->action = $route['action'];
                         unset($url[0], $url[1]);
                         break;  

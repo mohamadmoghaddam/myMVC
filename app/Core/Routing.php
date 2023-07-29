@@ -14,7 +14,7 @@ class Routing {
             'route' => 'login',
             'module' => 'Base',
             'controller' => 'DefaultController',
-            'action' => 'loginw'
+            'action' => 'login'
         ],
         [
             'route' => 'register',
@@ -29,7 +29,7 @@ class Routing {
             'action' => 'users'
         ],
         [
-            'route' => 'users/edit',
+            'route' => 'edituser',
             'module' => 'Base',
             'controller' => 'DefaultController',
             'action' => 'edituser'

@@ -6,6 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Base\\Config\\Database' => $baseDir . '/app/Base/Config/Database.php',
+    'Base\\Controllers\\DefaultController' => $baseDir . '/app/Base/Controllers/DefaultController.php',
+    'Base\\Models\\User' => $baseDir . '/app/Base/Models/User.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Core\\App' => $baseDir . '/app/Core/App.php',
+    'Core\\BaseController' => $baseDir . '/app/Core/BaseController.php',
+    'Core\\Interfaces\\ControllerInterface' => $baseDir . '/app/Core/Interfaces/ControllerInterface.php',
+    'Core\\Interfaces\\UserInterface' => $baseDir . '/app/Core/Interfaces/UserInterface.php',
     'Core\\Routing' => $baseDir . '/app/Core/Routing.php',
 );

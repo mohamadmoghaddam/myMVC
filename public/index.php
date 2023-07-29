@@ -1,8 +1,9 @@
 <?php
 ini_set('display_errors', '1');
-require_once __DIR__ . '/../vendor/autoload.php';
 
-new Core\App();
+use Core\App;
+require_once __DIR__ . '/../vendor/autoload.php';
+new App();
 
 function dd($input)
 {
