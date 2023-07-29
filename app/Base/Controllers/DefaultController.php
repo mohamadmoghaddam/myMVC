@@ -8,25 +8,30 @@ class DefaultController extends BaseController {
 
     public function login(){
         if(isset($_POST['submit'])){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $dbObj = new \Base\Config\Database();
-            $user = new \Base\Models\User($dbObj);
-            $result= $user -> fetchByUsername($username);
-            $row = $result -> fetch_assoc();
-            if (($username == $row['username']) and ($password == $row['password'])){
-                $fname = $row['firstname'];
-                $lname = $row['lastname'];
-                $session = new Session;
-                $session -> set('username', $username);
-                $session -> set('firstname', $fname);
-                $session -> set('lastname', $lname);
-                parent::renderView('Base', 'default', 'users');
-            }else{
-                parent::renderView('Base', 'default', 'login', ['wrong username or password']);
-                }
+            $this->logUserIn();
         }else{
         parent::renderView('Base', 'default', 'login');
+        }
+    }
+
+    private function logUserIn(){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $dbObj = new \Base\Config\Database();
+        $user = new \Base\Models\User($dbObj);
+        $result= $user -> fetchByUsername($username);
+        $row = $result -> fetch_assoc();
+        if (($username == $row['username']) and ($password == $row['password'])){
+            $fname = $row['firstname'];
+            $lname = $row['lastname'];
+            $session = new Session;
+            $session -> set('username', $username);
+            $session -> set('firstname', $fname);
+            $session -> set('lastname', $lname);
+
+            $this->users();
+        }else{
+            parent::renderView('Base', 'default', 'login', ['wrong username or password']);
         }
     }
 
@@ -35,7 +40,13 @@ class DefaultController extends BaseController {
     }
 
     public function users(){
-        parent::renderView('Base', 'default', 'users');
+        $session = new Session;
+        if($session -> get('username') != null){
+            $dbObj = new \Base\Config\Database();
+            $user = new \Base\Models\User($dbObj);
+            $rows = $user->fetch();
+            parent::renderView('Base', 'default', 'users', $rows);
+        }
     }
 
     public function edituser($id = null){
