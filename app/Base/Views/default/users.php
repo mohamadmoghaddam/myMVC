@@ -14,16 +14,16 @@
 
 	</head>
 	<body>
+        <div class="table-wrap" style="background-image: url('images/bg-03.jpg');">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Users Table</h2>
+					<h2 class="heading-section" style="color:white; font-family: Ubuntu-Bold; font-size: 34px;">USERS</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="table-wrap">
 						<table class="table">
 						  <thead class="thead-dark">    
 						    <tr>
