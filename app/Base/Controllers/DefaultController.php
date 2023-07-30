@@ -133,7 +133,11 @@ class DefaultController extends BaseController {
             header("Location:http://mvc.local/users");
         }
     }
-
+    public function logout()
+    {   
+        Session::destroy();
+        header("Location:http://mvc.local/login");
+    }
     public function notfound()
     {
         parent::renderView('Base', 'default', 'notfound');

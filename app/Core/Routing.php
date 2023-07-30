@@ -34,6 +34,11 @@ class Routing {
             'controller' => 'DefaultController',
             'action' => 'edituser'
         ],
+        [   'route' => 'logout',
+            'module' => 'Base',
+            'controller' => 'DefaultController',
+            'action' => 'logout'
+        ]
     ];
 
     
