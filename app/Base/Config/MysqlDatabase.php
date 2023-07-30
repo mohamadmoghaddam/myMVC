@@ -1,9 +1,10 @@
 <?php
 namespace Base\Config;
 
+use Core\Interfaces\DatabaseInterface;
 use mysqli;
 
-class Database {
+class MysqlDatabase implements DatabaseInterface {
     private const HOST = 'localhost';
     private const USER = 'root';
     private const PASS = '';

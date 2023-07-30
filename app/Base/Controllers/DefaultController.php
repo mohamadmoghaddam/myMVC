@@ -21,7 +21,7 @@ class DefaultController extends BaseController {
     private function signIn(){
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $dbObj = new \Base\Config\Database();
+        $dbObj = new \Base\Config\MysqlDatabase();
         $user = new \Base\Models\User($dbObj);
         $row= $user -> fetchByUsername($username);
         unset($_POST);
@@ -58,7 +58,7 @@ class DefaultController extends BaseController {
         if(empty($username) or empty($password)){
             parent::renderView('Base', 'default', 'register',['Fill the required fields!']);
         }else if($password == $confirmpassword){
-        $dbObj = new \Base\Config\Database();
+        $dbObj = new \Base\Config\MysqlDatabase();
         $user = new \Base\Models\User($dbObj);
         $data = [$username, $password, $fname, $lname];
         $user -> create($data);
@@ -72,7 +72,7 @@ class DefaultController extends BaseController {
     public function users()
     {
         if(Session::get('username') != null){
-                $dbObj = new \Base\Config\Database();
+                $dbObj = new \Base\Config\MysqlDatabase();
                 $user = new \Base\Models\User($dbObj);
                 $rows = $user->fetch();
                 parent::renderView('Base', 'default', 'users', $rows);
@@ -85,7 +85,7 @@ class DefaultController extends BaseController {
     public function edituser($action = 'edit',$id = null)
     {
         if(Session::get('username') != null){
-            $dbObj = new \Base\Config\Database();
+            $dbObj = new \Base\Config\MysqlDatabase();
             $user = new \Base\Models\User($dbObj);
             if ($action == 'edit'){
                 $row= $user -> fetchById($id);
@@ -121,7 +121,7 @@ class DefaultController extends BaseController {
                 parent::renderView('Base', 'default', 'edituser' , $row);
                 echo "fill the required fields!";
             }else if($password == $confirmpassword){
-            $dbObj = new \Base\Config\Database();
+            $dbObj = new \Base\Config\MysqlDatabase();
             $user = new \Base\Models\User($dbObj);
             $data = [$username, $password, $fname, $lname];
             $user -> update($id, $data);
