@@ -14,8 +14,4 @@ function dd($input)
     echo "</pre>";
     die;
 }
-
-
-
-
 ?>
