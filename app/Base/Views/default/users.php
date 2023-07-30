@@ -32,7 +32,7 @@
                                 <th>First name</th>
                                 <th>Last name</th>
 						                    <th>&nbsp;</th>
-                                <th>&nbsp;</th>
+                                <th><a href="http://mvc.local/logout" class='close' style="color: #ff0000;"><i class='fa fa-sign-out'></i></a></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -51,7 +51,7 @@
                                 <td> <?php echo  $firstname; ?></td>
                                 <td><?php echo $lastname ?></td>
                                 <td>
-                                    <a href='http://mvc.local/edituser/<?php echo $userId; ?>' class='close'>
+                                    <a href='http://mvc.local/edituser/edit/<?php echo $userId; ?>' class='close'>
                                         <i class='fa fa-edit'></i>
                                     </a>
                                 </td>
