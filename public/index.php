@@ -3,8 +3,10 @@ ini_set('display_errors', '1');
 
 use Core\App;
 require_once __DIR__ . '/../vendor/autoload.php';
-new App();
+use \Base\Classes\Session;
 
+Session::init();
+new App();
 function dd($input)
 {
     echo "<pre>";

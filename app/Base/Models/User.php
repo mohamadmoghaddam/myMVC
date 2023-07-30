@@ -25,7 +25,7 @@ class User implements UserInterface {
     }
 
     public function fetchById(int $id){
-        $stmt = "SELECT * FROM " . self::USERTABLE . " WHERE 'user_id' = ?";
+        $stmt = "SELECT * FROM " . self::USERTABLE . " WHERE user_id = ?";
         try{
         $stmt = $this->mysqli -> prepare($stmt);
         $stmt -> bind_param("i",$id);
@@ -45,10 +45,11 @@ class User implements UserInterface {
         $stmt -> bind_param("s",$username);
         $stmt -> execute();
         $result = $stmt -> get_result();
+        $row = $result -> fetch_assoc();
         }catch(\mysqli_sql_exception $e) {
             echo $e -> getMessage();
         }
-        return $result;
+        return $row;
     }
 
     public function create(array $data){
@@ -68,23 +69,21 @@ class User implements UserInterface {
     }
     
     public function update(int $id, array $data){
-        
-        $stmt = "UPDATE  " . self::USERTABLE . "  SET `username`= ? ,`password`= ? ,`firstname`= ? ,`lastname`= ? ,`role`= ? WHERE 'user_id' = ? ";
+        $stmt = "UPDATE  " . self::USERTABLE . "  SET `username`= ? ,`password`= ? ,`firstname`= ? ,`lastname`= ? WHERE user_id = ? ";
         try{
         $stmt = $this->mysqli -> prepare($stmt);
         $user = $data[0];
         $passw = $data[1];
         $fname = $data[2];
         $lname = $data [3];
-        $role = "newbie";
-        $stmt -> bind_param("sssss", $user, $passw, $fname, $lname, $role);
+        $stmt -> bind_param("sssss", $user, $passw, $fname, $lname, $id);
         $stmt -> execute();
         }catch(\mysqli_sql_exception $e) {
             echo $e -> getMessage();
         }
     }
     public function delete(int $id){
-        $stmt = "DELETE FROM  " . self::USERTABLE . " WHERE 'user_id' = ?";
+        $stmt = "DELETE FROM  " . self::USERTABLE . " WHERE user_id = ?";
         try{
         $stmt = $this->mysqli-> prepare($stmt);
         $stmt -> bind_param("i",$id);

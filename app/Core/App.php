@@ -23,14 +23,14 @@ class App {
         if ($routing->routes){
             $this->controller = new DefaultController;
             $this->action = 'homepage';
-            $controllerPlusAction = (isset($url[0]) ? $url[0] : '') . (isset($url[1]) ? '/' . $url[1] : '');
+            $controllerPlusAction = (isset($url[0]) ? $url[0] : '');
             foreach($routing->routes as $route){
                 if(($route['route']) === ($controllerPlusAction)){
                     if(file_exists('../app/' . $route['module'] . '/Controllers/' . $route['controller'] . '.php')){
                         $dynamicControllerName = '\\' . $route['module'] . '\Controllers\\' . $route['controller'];
                         $this->controller = new $dynamicControllerName;
                         $this->action = $route['action'];
-                        unset($url[0], $url[1]);
+                        unset($url[0]);
                         break;  
                     }else {
                         $this->action = 'homepage';
