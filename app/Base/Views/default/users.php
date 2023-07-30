@@ -31,7 +31,7 @@
                                 <th>Username</th>
                                 <th>First name</th>
                                 <th>Last name</th>
-						        <th>&nbsp;</th>
+						                    <th>&nbsp;</th>
                                 <th>&nbsp;</th>
 						    </tr>
 						  </thead>
@@ -51,12 +51,12 @@
                                 <td> <?php echo  $firstname; ?></td>
                                 <td><?php echo $lastname ?></td>
                                 <td>
-                                    <a href='#' class='close'>
+                                    <a href='http://mvc.local/edituser/<?php echo $userId; ?>' class='close'>
                                         <i class='fa fa-edit'></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href='#' class='close'>
+                                    <a href='http://mvc.local/edituser/delete/<?php echo $userId; ?>' class='close'>
                                         <i class='fa fa-close'></i>
                                     </a>
                                 </td>

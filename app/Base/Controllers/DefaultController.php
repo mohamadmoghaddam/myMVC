@@ -9,7 +9,11 @@ class DefaultController extends BaseController {
     public function login(){
         if(isset($_POST['submit'])){
             $this->signIn();
-        }else{
+        }else if(Session::get('username') != null)
+        {  
+            header("Location:http://mvc.local/users");
+        }
+        else{
         parent::renderView('Base', 'default', 'login');
         }
     }
@@ -19,17 +23,15 @@ class DefaultController extends BaseController {
         $password = $_POST['password'];
         $dbObj = new \Base\Config\Database();
         $user = new \Base\Models\User($dbObj);
-        $result= $user -> fetchByUsername($username);
-        $row = $result -> fetch_assoc();
+        $row= $user -> fetchByUsername($username);
         if (($username == $row['username']) and ($password == $row['password'])){
             $fname = $row['firstname'];
             $lname = $row['lastname'];
-            $session = new Session;
-            $session -> set('username', $username);
-            $session -> set('firstname', $fname);
-            $session -> set('lastname', $lname);
+            Session::set('username', $username);
+            Session::set('firstname', $fname);
+            Session::set('lastname', $lname);
 
-            $this->users();
+            header("Location:http://mvc.local/users");
         }else{
             parent::renderView('Base', 'default', 'login', ['Wrong username or password']);
         }
@@ -43,7 +45,8 @@ class DefaultController extends BaseController {
         }
     }
 
-    private function signUp(){
+    private function signUp()
+    {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $fname = $_POST['firstname'];
@@ -59,21 +62,75 @@ class DefaultController extends BaseController {
         }
     }
 
-    public function users(){
-        $session = new Session;
-        if($session -> get('username') != null){
-            $dbObj = new \Base\Config\Database();
-            $user = new \Base\Models\User($dbObj);
-            $rows = $user->fetch();
-            parent::renderView('Base', 'default', 'users', $rows);
+    public function users()
+    {
+        if(Session::get('username') != null){
+                $dbObj = new \Base\Config\Database();
+                $user = new \Base\Models\User($dbObj);
+                $rows = $user->fetch();
+                parent::renderView('Base', 'default', 'users', $rows);
+        }
+        else{
+            header("Location:http://mvc.local/login");
         }
     }
 
-    public function edituser($id = null){
-        parent::renderView('Base', 'default', 'edituser' , ['id' => $id ]);
+    public function edituser($action = 'edit',$id = null)
+    {
+        if(Session::get('username') != null){
+            $dbObj = new \Base\Config\Database();
+            $user = new \Base\Models\User($dbObj);
+            if ($action == 'edit'){
+                $row= $user -> fetchById($id);
+                if(isset($_POST['submit']))
+                {
+                    $this->updateUser($id, $row);
+                }else
+                {
+                parent::renderView('Base', 'default', 'edituser' , $row);
+                }
+            }else if($action == 'delete'){
+                $user->delete($id);
+                header("Location:http://mvc.local/users");
+            }else{
+                header("Location:http://mvc.local/login");
+            }
+        }
+        else{
+            header("Location:http://mvc.local/login");
+        }
+        
+    }
+    private function updateUser(int $id, $row)
+    {
+        if($_POST['submit'] == 'submit'){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $confirmpassword = $_POST['confirmpassword'];
+            $fname = $_POST['firstname'];
+            $lname = $_POST['lastname'];
+            if(empty($username) or empty($password)){
+                parent::renderView('Base', 'default', 'edituser' , $row);
+                echo "fill the required fields!";
+            }else if($password == $confirmpassword){
+            $dbObj = new \Base\Config\Database();
+            $user = new \Base\Models\User($dbObj);
+            $data = [$username, $password, $fname, $lname];
+            $user -> update($id, $data);
+            header("Location:http://mvc.local/users");
+            }else{
+                parent::renderView('Base', 'default', 'edituser' , $row);
+                echo "password and confirm are not same!";
+            }
+        }
+        else
+        {
+            header("Location:http://mvc.local/users");
+        }
     }
 
-    public function notfound(){
+    public function notfound()
+    {
         parent::renderView('Base', 'default', 'notfound');
     }
 
