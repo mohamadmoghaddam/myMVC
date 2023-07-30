@@ -24,6 +24,7 @@ class DefaultController extends BaseController {
         $dbObj = new \Base\Config\Database();
         $user = new \Base\Models\User($dbObj);
         $row= $user -> fetchByUsername($username);
+        unset($_POST);
         if (($username == $row['username']) and ($password == $row['password'])){
             $fname = $row['firstname'];
             $lname = $row['lastname'];
@@ -40,6 +41,8 @@ class DefaultController extends BaseController {
     public function register(){
         if(isset($_POST['submit'])){
             $this->signUp();
+        }else if(Session::get('username') != null){  
+            header("Location:http://mvc.local/users");
         }else{
         parent::renderView('Base', 'default', 'register');
         }
@@ -58,7 +61,8 @@ class DefaultController extends BaseController {
         $user = new \Base\Models\User($dbObj);
         $data = [$username, $password, $fname, $lname];
         $user -> create($data);
-        parent::renderView('Base', 'default', 'login', ['You are registered! Now log in.']);
+        unset($_POST);
+        header("Location:http://mvc.local/login");
         }
     }
 
@@ -109,6 +113,7 @@ class DefaultController extends BaseController {
             $confirmpassword = $_POST['confirmpassword'];
             $fname = $_POST['firstname'];
             $lname = $_POST['lastname'];
+            unset($_POST);
             if(empty($username) or empty($password)){
                 parent::renderView('Base', 'default', 'edituser' , $row);
                 echo "fill the required fields!";
