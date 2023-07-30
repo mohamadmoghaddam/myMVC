@@ -25,7 +25,7 @@ class DefaultController extends BaseController {
         $user = new \Base\Models\User($dbObj);
         $row= $user -> fetchByUsername($username);
         unset($_POST);
-        if (($username == $row['username']) and ($password == $row['password'])){
+        if ((!empty($username) and $username == $row['username']) and ($password == $row['password'])){
             $fname = $row['firstname'];
             $lname = $row['lastname'];
             Session::set('username', $username);
@@ -52,17 +52,20 @@ class DefaultController extends BaseController {
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $confirmpassword = $_POST['confirmpassword'];
         $fname = $_POST['firstname'];
         $lname = $_POST['lastname'];
         if(empty($username) or empty($password)){
             parent::renderView('Base', 'default', 'register',['Fill the required fields!']);
-        }else{
+        }else if($password == $confirmpassword){
         $dbObj = new \Base\Config\Database();
         $user = new \Base\Models\User($dbObj);
         $data = [$username, $password, $fname, $lname];
         $user -> create($data);
         unset($_POST);
         header("Location:http://mvc.local/login");
+        }else{
+            parent::renderView('Base', 'default', 'register' , ['Password and confirm are not the same!']);
         }
     }
 
@@ -125,7 +128,7 @@ class DefaultController extends BaseController {
             header("Location:http://mvc.local/users");
             }else{
                 parent::renderView('Base', 'default', 'edituser' , $row);
-                echo "password and confirm are not same!";
+                echo "password and confirm are not the same!";
             }
         }
         else
