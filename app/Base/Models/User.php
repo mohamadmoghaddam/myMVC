@@ -1,6 +1,7 @@
 <?php
 namespace Base\Models;
 
+use Base\Config\MysqlDatabase;
 use Core\Interfaces\UserInterface;
 use Core\Interfaces\DatabaseInterface;
 use mysqli;
@@ -9,8 +10,8 @@ class User implements UserInterface {
     private $connection;
     private const USERTABLE = 'users'; 
 
-    public function __construct(DatabaseInterface $dbObj) {
-        $connection = $dbObj -> connect();
+    public function __construct(DatabaseInterface $dbInstance) {
+        $connection = $dbInstance -> getConnection();
         $this->connection = $connection;
     }
 
