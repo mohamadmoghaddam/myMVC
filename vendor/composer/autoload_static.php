@@ -29,14 +29,15 @@ class ComposerStaticInit1212a30546c78c3108d526c5d48d4f3a
     );
 
     public static $classMap = array (
-        'Base\\Classes\\Session' => __DIR__ . '/../..' . '/app/Base/Classes/Session.php',
-        'Base\\Config\\Database' => __DIR__ . '/../..' . '/app/Base/Config/Database.php',
+        'Base\\Config\\MysqlDatabase' => __DIR__ . '/../..' . '/app/Base/Config/MysqlDatabase.php',
+        'Base\\Config\\Session' => __DIR__ . '/../..' . '/app/Base/Config/Session.php',
         'Base\\Controllers\\DefaultController' => __DIR__ . '/../..' . '/app/Base/Controllers/DefaultController.php',
         'Base\\Models\\User' => __DIR__ . '/../..' . '/app/Base/Models/User.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Core\\App' => __DIR__ . '/../..' . '/app/Core/App.php',
         'Core\\BaseController' => __DIR__ . '/../..' . '/app/Core/BaseController.php',
         'Core\\Interfaces\\ControllerInterface' => __DIR__ . '/../..' . '/app/Core/Interfaces/ControllerInterface.php',
+        'Core\\Interfaces\\DatabaseInterface' => __DIR__ . '/../..' . '/app/Core/Interfaces/DatabaseInterface.php',
         'Core\\Interfaces\\UserInterface' => __DIR__ . '/../..' . '/app/Core/Interfaces/UserInterface.php',
         'Core\\Routing' => __DIR__ . '/../..' . '/app/Core/Routing.php',
     );

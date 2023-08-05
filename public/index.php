@@ -3,7 +3,7 @@ ini_set('display_errors', '1');
 
 use Core\App;
 require_once __DIR__ . '/../vendor/autoload.php';
-use \Base\Classes\Session;
+use \Base\Config\Session;
 
 Session::init();
 new App();

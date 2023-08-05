@@ -1,5 +1,5 @@
 <?php  
-namespace Base\Classes;
+namespace Base\Config;
 
 class Session
 {

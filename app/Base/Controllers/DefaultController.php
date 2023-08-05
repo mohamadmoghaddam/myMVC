@@ -1,7 +1,7 @@
 <?php 
 namespace Base\Controllers;
 
-use Base\Classes\Session;
+use Base\Config\Session;
 use \Core\BaseController;
 use Base\Config\MysqlDatabase;
 
@@ -26,7 +26,7 @@ class DefaultController extends BaseController {
         $user = new \Base\Models\User($instance);
         $row= $user -> fetchByUsername($username);
         unset($_POST);
-        if ((!empty($username) and $username == $row['username']) and ($password == $row['password'])){
+        if ((!empty($username) and $username == $row['username']) and (!empty($password) and $password == $row['password'])){
             $fname = $row['firstname'];
             $lname = $row['lastname'];
             Session::set('username', $username);

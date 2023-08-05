@@ -1,10 +1,9 @@
 <?php
 namespace Base\Models;
 
-use Base\Config\MysqlDatabase;
+
 use Core\Interfaces\UserInterface;
 use Core\Interfaces\DatabaseInterface;
-use mysqli;
 
 class User implements UserInterface {
     private $connection;
