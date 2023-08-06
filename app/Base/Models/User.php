@@ -1,7 +1,7 @@
 <?php
 namespace Base\Models;
 
-
+use Base\Config\ProxyDatabase;
 use Core\Interfaces\UserInterface;
 use Core\Interfaces\DatabaseInterface;
 
@@ -9,7 +9,8 @@ class User implements UserInterface {
     private $connection;
     private const USERTABLE = 'users'; 
 
-    public function __construct(DatabaseInterface $dbInstance) {
+    public function __construct() {
+        $dbInstance = new ProxyDatabase;
         $connection = $dbInstance -> getConnection();
         $this->connection = $connection;
     }
