@@ -22,8 +22,7 @@ class DefaultController extends BaseController {
     private function signIn(){
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $instance = MysqlDatabase::getInstance();
-        $user = new \Base\Models\User($instance);
+        $user = new \Base\Models\User();
         $row= $user -> fetchByUsername($username);
         unset($_POST);
         if ((!empty($username) and $username == $row['username']) and (!empty($password) and $password == $row['password'])){
@@ -59,9 +58,8 @@ class DefaultController extends BaseController {
         if(empty($username) or empty($password)){
             parent::renderView('Base', 'default', 'register',['Fill the required fields!']);
         }else if($password == $confirmpassword){
-        $instance = MysqlDatabase::getInstance();
-        $user = new \Base\Models\User($instance);
-        $data = [$username, $password, $fname, $lname];
+        $data = [$username, $password, $fname, $lname]; 
+        $user = new \Base\Models\User();
         $user -> create($data);
         unset($_POST);
         header("Location:http://mvc.local/login");
@@ -73,8 +71,7 @@ class DefaultController extends BaseController {
     public function users()
     {
         if(Session::get('username') != null){
-                $instance = MysqlDatabase::getInstance();
-                $user = new \Base\Models\User($instance);
+                $user = new \Base\Models\User();
                 $rows = $user->fetch();
                 parent::renderView('Base', 'default', 'users', $rows);
         }
@@ -86,9 +83,8 @@ class DefaultController extends BaseController {
     public function edituser($action = 'edit',$id = null)
     {
         if(Session::get('username') != null){
-            $instance = MysqlDatabase::getInstance();
-            $user = new \Base\Models\User($instance);
             if ($action == 'edit'){
+                $user = new \Base\Models\User();
                 $row= $user -> fetchById($id);
                 if(isset($_POST['submit']))
                 {
@@ -98,6 +94,7 @@ class DefaultController extends BaseController {
                 parent::renderView('Base', 'default', 'edituser' , $row);
                 }
             }else if($action == 'delete'){
+                $user = new \Base\Models\User();
                 $user->delete($id);
                 header("Location:http://mvc.local/users");
             }else{
@@ -122,8 +119,7 @@ class DefaultController extends BaseController {
                 parent::renderView('Base', 'default', 'edituser' , $row);
                 echo "fill the required fields!";
             }else if($password == $confirmpassword){
-            $instance = MysqlDatabase::getInstance();
-            $user = new \Base\Models\User($instance);
+            $user = new \Base\Models\User();
             $data = [$username, $password, $fname, $lname];
             $user -> update($id, $data);
             header("Location:http://mvc.local/users");
